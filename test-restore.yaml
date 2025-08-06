@@ -1,0 +1,31 @@
+apiVersion: postgresql.k8s.enterprisedb.io/v1
+kind: Cluster
+metadata:
+  name: cluster-restored-test
+  namespace: default
+spec:
+  instances: 1 # Start with 1 instance for faster testing
+  storage:
+    size: 1Gi
+
+  # Bootstrap from backup
+  bootstrap:
+    recovery:
+      # Source cluster configuration
+      source: cluster-backup-source
+      # Restore to specific backup
+      backup:
+        name: manual-20250806-085925
+
+  # External cluster definition for restore
+  externalClusters:
+  - name: cluster-backup-source
+    barmanObjectStore:
+      destinationPath: "s3://cnpg-backup-510/cluster-example/cluster-example"
+      s3Credentials:
+        accessKeyId:
+          name: backup-storage-creds
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: backup-storage-creds
+          key: SECRET_ACCESS_KEY

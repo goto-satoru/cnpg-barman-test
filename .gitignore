@@ -1,0 +1,92 @@
+# Kubernetes secrets and sensitive files
+*.key
+*.crt
+*.pem
+*-secret.yaml
+*secret*.yaml
+secrets/
+
+# Backup and restore files
+*.backup
+*.dump
+*.sql.gz
+backups/
+restore/
+
+# MinIO data and logs
+minio-data/
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment and configuration files
+.env
+.env.local
+.env.production
+config.local.yaml
+local-config.yaml
+
+# Terraform files (if used for infrastructure)
+*.tfstate
+*.tfstate.backup
+.terraform/
+*.tfplan
+*.tfvars
+
+# Helm charts temporary files
+charts/*.tgz
+requirements.lock
+
+# kubectl cache and config
+.kube/cache/
+kubeconfig
+*.kubeconfig
+
+# Scripts output and logs
+output/
+logs/
+*.out
+
+# Mac specific
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux specific
+*~
+
+# Python cache (if using Python scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Local development overrides
+local/
+dev/
+development/
+
+# PID files
+*.pid
+
+# Port forward process files
+port-forward.pid
+pf-*.pid
+

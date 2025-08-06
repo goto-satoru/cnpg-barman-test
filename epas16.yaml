@@ -1,0 +1,46 @@
+apiVersion: postgresql.k8s.enterprisedb.io/v1
+kind: Cluster
+metadata:
+  name: epas162
+  namespace: cnpg
+spec:
+  imageName: docker.enterprisedb.com/k8s_enterprise/edb-postgres-advanced:16
+  imagePullSecrets:
+  - name: edb-pull-secret
+  instances: 3
+  superuserSecret:
+    name: epas162-superuser
+  storage:
+    # storageClass: standard-rwo
+    size: 1Gi
+
+  # Backup configuration for EDB cluster
+  backup:
+    barmanObjectStore:
+      destinationPath: "s3://cnpg-backup-bucket/epas162"
+      s3Credentials:
+        accessKeyId:
+          name: backup-storage-creds
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: backup-storage-creds
+          key: SECRET_ACCESS_KEY
+      endpointURL: "http://minio.default.svc.cluster.local:9000"
+      wal:
+        retention: "7d"
+      data:
+        retention: "30d"
+
+  # External clusters for restore
+  externalClusters:
+  - name: epas162-backup-source
+    barmanObjectStore:
+      destinationPath: "s3://cnpg-backup-bucket/epas162"
+      s3Credentials:
+        accessKeyId:
+          name: backup-storage-creds
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: backup-storage-creds
+          key: SECRET_ACCESS_KEY
+      endpointURL: "http://minio.default.svc.cluster.local:9000"
