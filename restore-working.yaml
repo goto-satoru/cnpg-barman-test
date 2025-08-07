@@ -15,7 +15,9 @@ spec:
   externalClusters:
   - name: cluster-backup-source
     barmanObjectStore:
+      # IMPORTANT: This should point to the original cluster's backup directory
       destinationPath: "s3://cnpg-backup-510"
+      serverName: "cluster-example"
       s3Credentials:
         accessKeyId:
           name: backup-storage-creds
