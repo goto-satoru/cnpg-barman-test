@@ -1,0 +1,384 @@
+---
+# PostgreSQL Instance Manager Logs for restored-1
+# Converted from JSON format to YAML for better readability
+
+logs:
+  - level: info
+    timestamp: "2025-08-07T08:05:53.65073201Z"
+    message: "Starting EDB Postgres for Kubernetes Instance Manager"
+    logger: instance-manager
+    logging_pod: restored-1
+    version: "1.26.1"
+    build:
+      Version: "1.26.1"
+      Commit: "02f5d9371"
+      Date: "2025-07-26"
+    FIPS140Compliance: enabled
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.650817469Z"
+    message: "Checking for free disk space for WALs before starting PostgreSQL"
+    logger: instance-manager
+    logging_pod: restored-1
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.661323635Z"
+    message: "starting tablespace manager"
+    logger: instance-manager
+    logging_pod: restored-1
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.661353177Z"
+    message: "starting external server manager"
+    logger: instance-manager
+    logging_pod: restored-1
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.661360719Z"
+    message: "starting controller-runtime manager"
+    logger: instance-manager
+    logging_pod: restored-1
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.661492177Z"
+    message: "Starting EventSource"
+    logger: instance-manager
+    logging_pod: restored-1
+    controller: instance-cluster
+    controllerGroup: postgresql.k8s.enterprisedb.io
+    controllerKind: Cluster
+    source: "kind source: *v1.Cluster"
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.661686302Z"
+    message: "Starting EventSource"
+    logger: instance-manager
+    logging_pod: restored-1
+    controller: instance-publication
+    controllerGroup: postgresql.k8s.enterprisedb.io
+    controllerKind: Publication
+    source: "kind source: *v1.Publication"
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.661690302Z"
+    message: "Starting EventSource"
+    logger: instance-manager
+    logging_pod: restored-1
+    controller: instance-database
+    controllerGroup: postgresql.k8s.enterprisedb.io
+    controllerKind: Database
+    source: "kind source: *v1.Database"
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.66192101Z"
+    message: "Starting EventSource"
+    logger: instance-manager
+    logging_pod: restored-1
+    controller: instance-subscription
+    controllerGroup: postgresql.k8s.enterprisedb.io
+    controllerKind: Subscription
+    source: "kind source: *v1.Subscription"
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.662752219Z"
+    logger: roles_reconciler
+    message: "starting up the runnable"
+    logging_pod: restored-1
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.662775927Z"
+    logger: roles_reconciler
+    message: "setting up RoleSynchronizer loop"
+    logging_pod: restored-1
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.662783594Z"
+    message: "Starting webserver"
+    logger: instance-manager
+    logging_pod: restored-1
+    address: ":9187"
+    hasTLS: false
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.66299501Z"
+    message: "Starting webserver"
+    logger: instance-manager
+    logging_pod: restored-1
+    address: ":8000"
+    hasTLS: true
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.663091135Z"
+    message: "Starting EventSource"
+    logger: instance-manager
+    logging_pod: restored-1
+    controller: instance-external-server
+    controllerGroup: postgresql.k8s.enterprisedb.io
+    controllerKind: Cluster
+    source: "kind source: *v1.Cluster"
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.663115469Z"
+    message: "Starting webserver"
+    logger: instance-manager
+    logging_pod: restored-1
+    address: "localhost:8010"
+    hasTLS: false
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.663168219Z"
+    message: "Starting EventSource"
+    logger: instance-manager
+    logging_pod: restored-1
+    controller: instance-tablespaces
+    controllerGroup: postgresql.k8s.enterprisedb.io
+    controllerKind: Cluster
+    source: "kind source: *v1.Cluster"
+
+  # Controllers Starting
+  - level: info
+    timestamp: "2025-08-07T08:05:53.763063385Z"
+    message: "Starting Controller"
+    logger: instance-manager
+    logging_pod: restored-1
+    controller: instance-subscription
+    controllerGroup: postgresql.k8s.enterprisedb.io
+    controllerKind: Subscription
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.783255427Z"
+    message: "Extracting pg_controldata information"
+    logger: instance-manager
+    logging_pod: restored-1
+    reason: "postmaster start up"
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.784027302Z"
+    logger: pg_controldata
+    message: |
+      pg_control version number:            1700
+      Catalog version number:               202406281
+      Database system identifier:           7535682056656134169
+      Database cluster state:               shut down
+      pg_control last modified:             Thu Aug  7 08:05:47 2025
+      Latest checkpoint location:           0/12000028
+      Latest checkpoint's REDO location:    0/12000028
+      Latest checkpoint's REDO WAL file:    000000020000000000000012
+      Latest checkpoint's TimeLineID:       2
+      Latest checkpoint's PrevTimeLineID:   2
+      Latest checkpoint's full_page_writes: on
+      Latest checkpoint's NextXID:          0:771
+      Latest checkpoint's NextOID:          24578
+      Latest checkpoint's NextMultiXactId:  1
+      Latest checkpoint's NextMultiOffset:  0
+      Latest checkpoint's oldestXID:        730
+      Latest checkpoint's oldestXID's DB:   1
+      Latest checkpoint's oldestActiveXID:  0
+      Latest checkpoint's oldestMultiXid:   1
+      Latest checkpoint's oldestMulti's DB: 1
+      Latest checkpoint's oldestCommitTsXid:0
+      Latest checkpoint's newestCommitTsXid:0
+      Time of latest checkpoint:            Thu Aug  7 08:05:47 2025
+      Fake LSN counter for unlogged rels:   0/3E8
+      Minimum recovery ending location:     0/0
+      Min recovery ending loc's timeline:   0
+      Backup start location:                0/0
+      Backup end location:                  0/0
+      End-of-backup record required:        no
+      wal_level setting:                    logical
+      wal_log_hints setting:                on
+      max_connections setting:              100
+      max_worker_processes setting:         32
+      max_wal_senders setting:              10
+      max_prepared_xacts setting:           0
+      max_locks_per_xact setting:           64
+      track_commit_timestamp setting:       off
+      Maximum data alignment:               8
+      Database block size:                  8192
+      Blocks per segment of large relation: 131072
+      WAL block size:                       8192
+      Bytes per WAL segment:                16777216
+      Maximum length of identifiers:        64
+      Maximum columns in an index:          32
+      Maximum size of a TOAST chunk:        1996
+      Size of a large-object chunk:         2048
+      Date/time type storage:               64-bit integers
+      Float8 argument passing:              by value
+      Data page checksum version:           0
+      Mock authentication nonce:            b741c244555809c2d6cebb56d51d3455b3f7d41edadf5ff47815eceae2a48754
+    pipe: stdout
+    logging_pod: restored-1
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.78440951Z"
+    message: "postmaster started"
+    logger: instance-manager
+    logging_pod: restored-1
+    postMasterPID: 30
+
+  # PostgreSQL Starting Up
+  - level: info
+    timestamp: "2025-08-07T08:05:53.797090844Z"
+    logger: postgres
+    message: "ending log output to stderr"
+    source: "/controller/log/postgres"
+    logging_pod: restored-1
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.797210594Z"
+    logger: postgres
+    logging_pod: restored-1
+    record:
+      log_time: "2025-08-07 08:05:53.796 UTC"
+      process_id: "30"
+      session_id: "68945e61.1e"
+      session_line_num: "2"
+      session_start_time: "2025-08-07 08:05:53 UTC"
+      transaction_id: "0"
+      error_severity: "LOG"
+      sql_state_code: "00000"
+      message: "starting PostgreSQL 17.5 on aarch64-unknown-linux-gnu, compiled by gcc (GCC) 8.5.0 20210514 (Red Hat 8.5.0-26), 64-bit"
+      backend_type: "postmaster"
+      query_id: "0"
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.797216969Z"
+    logger: postgres
+    logging_pod: restored-1
+    record:
+      log_time: "2025-08-07 08:05:53.796 UTC"
+      process_id: "30"
+      session_id: "68945e61.1e"
+      session_line_num: "3"
+      session_start_time: "2025-08-07 08:05:53 UTC"
+      transaction_id: "0"
+      error_severity: "LOG"
+      sql_state_code: "00000"
+      message: "listening on IPv4 address \"0.0.0.0\", port 5432"
+      backend_type: "postmaster"
+      query_id: "0"
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.79724001Z"
+    logger: postgres
+    logging_pod: restored-1
+    record:
+      log_time: "2025-08-07 08:05:53.796 UTC"
+      process_id: "30"
+      session_id: "68945e61.1e"
+      session_line_num: "4"
+      session_start_time: "2025-08-07 08:05:53 UTC"
+      transaction_id: "0"
+      error_severity: "LOG"
+      sql_state_code: "00000"
+      message: "listening on IPv6 address \"::\", port 5432"
+      backend_type: "postmaster"
+      query_id: "0"
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.798106635Z"
+    logger: postgres
+    logging_pod: restored-1
+    record:
+      log_time: "2025-08-07 08:05:53.798 UTC"
+      process_id: "30"
+      session_id: "68945e61.1e"
+      session_line_num: "5"
+      session_start_time: "2025-08-07 08:05:53 UTC"
+      transaction_id: "0"
+      error_severity: "LOG"
+      sql_state_code: "00000"
+      message: "listening on Unix socket \"/controller/run/.s.PGSQL.5432\""
+      backend_type: "postmaster"
+      query_id: "0"
+
+  - level: info
+    timestamp: "2025-08-07T08:05:53.800691594Z"
+    logger: postgres
+    logging_pod: restored-1
+    record:
+      log_time: "2025-08-07 08:05:53.800 UTC"
+      process_id: "35"
+      session_id: "68945e61.23"
+      session_line_num: "1"
+      session_start_time: "2025-08-07 08:05:53 UTC"
+      transaction_id: "0"
+      error_severity: "LOG"
+      sql_state_code: "00000"
+      message: "database system was shut down at 2025-08-07 08:05:47 UTC"
+      backend_type: "startup"
+      query_id: "0"
+
+  # Database Ready
+  - level: info
+    timestamp: "2025-08-07T08:05:53.803151094Z"
+    logger: postgres
+    logging_pod: restored-1
+    record:
+      log_time: "2025-08-07 08:05:53.803 UTC"
+      process_id: "30"
+      session_id: "68945e61.1e"
+      session_line_num: "6"
+      session_start_time: "2025-08-07 08:05:53 UTC"
+      transaction_id: "0"
+      error_severity: "LOG"
+      sql_state_code: "00000"
+      message: "database system is ready to accept connections"
+      backend_type: "postmaster"
+      query_id: "0"
+
+  # Checkpoint Operations
+  - level: info
+    timestamp: "2025-08-07T08:06:07.706812836Z"
+    logger: postgres
+    logging_pod: restored-1
+    record:
+      log_time: "2025-08-07 08:06:07.706 UTC"
+      process_id: "33"
+      session_id: "68945e61.21"
+      session_line_num: "1"
+      session_start_time: "2025-08-07 08:05:53 UTC"
+      transaction_id: "0"
+      error_severity: "LOG"
+      sql_state_code: "00000"
+      message: "checkpoint starting: force wait"
+      backend_type: "checkpointer"
+      query_id: "0"
+
+  - level: info
+    timestamp: "2025-08-07T08:06:08.753889337Z"
+    logger: postgres
+    logging_pod: restored-1
+    record:
+      log_time: "2025-08-07 08:06:08.753 UTC"
+      process_id: "33"
+      session_id: "68945e61.21"
+      session_line_num: "2"
+      session_start_time: "2025-08-07 08:05:53 UTC"
+      transaction_id: "0"
+      error_severity: "LOG"
+      sql_state_code: "00000"
+      message: "checkpoint complete: wrote 13 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.017 s, sync=0.008 s, total=1.047 s; sync files=8, longest=0.005 s, average=0.001 s; distance=16384 kB, estimate=16384 kB; lsn=0/13000080, redo lsn=0/13000028"
+      backend_type: "checkpointer"
+      query_id: "0"
+
+# Summary of PostgreSQL restored-1 instance startup
+summary:
+  cluster_name: restored
+  pod_name: restored-1
+  postgresql_version: "17.5"
+  architecture: "aarch64-unknown-linux-gnu"
+  status: "Database system is ready to accept connections"
+  startup_sequence:
+    - "Instance Manager started"
+    - "Controllers initialized"
+    - "PostgreSQL postmaster started (PID: 30)"
+    - "Database listening on ports IPv4/IPv6:5432 and Unix socket"
+    - "Database system ready for connections"
+    - "Checkpoint operations running normally"
+  key_details:
+    timeline_id: 2
+    database_system_identifier: 7535682056656134169
+    wal_level: logical
+    max_connections: 100
+    last_checkpoint: "2025-08-07 08:05:47 UTC"

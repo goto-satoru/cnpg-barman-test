@@ -91,3 +91,4 @@ development/
 port-forward.pid
 pf-*.pid
 
+.cache_ggshield

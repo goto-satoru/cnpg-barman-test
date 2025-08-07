@@ -11,7 +11,7 @@ passwd=`kubectl get secret example1-app -o jsonpath="{.data.password}" | base64 
 
 echo "username: $user"
 echo "password: $passwd"
-echo "psql -h 127.0.0.1 -p 5432 -U $user -d app -W"
+echo "psql -h 127.0.0.1 -p 15432 -U $user -d app -W"
 echo ""
 echo "Port forward PID: $PORT_FORWARD_PID"
 echo "To stop port forward: kill $PORT_FORWARD_PID"

@@ -152,30 +152,18 @@ esac
 # Add external cluster configuration
 cat >> "$RESTORE_YAML" << EOF
 
-  # AWS S3 backup configuration for restore
-  backup:
-    barmanObjectStore:
-      destinationPath: "s3://$BUCKET_NAME"
-      s3Credentials:
-        accessKeyId:
-          name: $SECRET_NAME
-          key: ACCESS_KEY_ID
-        secretAccessKey:
-          name: $SECRET_NAME
-          key: SECRET_ACCESS_KEY
-
   # External cluster definition for restore
   externalClusters:
   - name: cluster-backup-source
     barmanObjectStore:
+      # CRITICAL: serverName must match the original cluster that created the backup
+      serverName: "$SOURCE_CLUSTER_NAME"
       destinationPath: "s3://$BUCKET_NAME/"
       s3Credentials:
         accessKeyId:
           name: $SECRET_NAME
           key: ACCESS_KEY_ID
         secretAccessKey:
-          name: $SECRET_NAME
-          key: SECRET_ACCESS_KEY
           name: $SECRET_NAME
           key: SECRET_ACCESS_KEY
 EOF
@@ -231,6 +219,11 @@ while [ $ELAPSED -lt $TIMEOUT ]; do
         "Cluster in healthy state")
             print_success "Restore completed successfully!"
             print_success "Cluster is healthy with $READY_INSTANCES/$INSTANCES instances ready"
+            
+            # Additional verification for restore success
+            if kubectl get pods -n "$NAMESPACE" -l cnpg.io/cluster="$RESTORE_CLUSTER_NAME" | grep -q "Running"; then
+                print_success "Primary instance is running and ready"
+            fi
             break
             ;;
         "Setting up primary")
@@ -271,6 +264,29 @@ kubectl get pods -n "$NAMESPACE" -l cnpg.io/cluster="$RESTORE_CLUSTER_NAME"
 
 echo ""
 print_success "Restore operation completed!"
+
+# Verify data restoration
+echo ""
+print_info "Verifying data restoration..."
+
+# Wait a moment for the cluster to be fully ready
+sleep 10
+
+# Check if sample data exists
+print_info "Checking restored data..."
+DATA_COUNT=$(kubectl exec -n "$NAMESPACE" "$RESTORE_CLUSTER_NAME-1" -- psql -U postgres -d app -t -c "SELECT COUNT(*) FROM sample_table;" 2>/dev/null | tr -d ' ')
+
+if [ $? -eq 0 ] && [ -n "$DATA_COUNT" ] && [ "$DATA_COUNT" -gt 0 ]; then
+    print_success "Data verification successful! Found $DATA_COUNT records in sample_table"
+else
+    print_warning "Data verification: No sample_table found or empty"
+    echo "   This might be normal if the original cluster had no sample data"
+fi
+
+# Check database list
+print_info "Available databases:"
+kubectl exec -n "$NAMESPACE" "$RESTORE_CLUSTER_NAME-1" -- psql -U postgres -c "\l" 2>/dev/null | grep -E "^ (app|postgres)"
+
 echo ""
 echo "🔧 Useful commands:"
 echo "   # Check cluster details"

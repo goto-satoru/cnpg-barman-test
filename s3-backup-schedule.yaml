@@ -3,8 +3,7 @@ kind: ScheduledBackup
 metadata:
   name: example1-scheduled
 spec:
-  # Schedule backups every hour
-  schedule: "0 0 * * * *"
+  schedule: "0 * * * *" # Every hour at minute 0
   # Backup retention policy
   backupOwnerReference: self
   cluster:
