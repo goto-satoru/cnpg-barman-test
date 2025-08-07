@@ -1,6 +1,6 @@
-# AWS S3 Backup Configuration for CNPG
+# AWS S3 Backup Configuration for CNPG Cluster
 
-This guide explains how to configure CloudNativePG (CNPG) backups to use AWS S3 instead of MinIO.
+This guide explains how to configure CloudNativePG (CNPG) Cluster backups to use AWS S3.
 
 ## 📋 Prerequisites
 
@@ -20,19 +20,19 @@ brew install awscli
 aws configure
 ```
 
-### 2. Set up AWS credentials for CNPG
+### 2. Set up AWS credentials for CNPG Cluster
 ```bash
 # Replace with your actual AWS credentials
 ./aws-s3-helper.sh setup-credentials <access-key> <secret-key>
 ```
 
-### 3. Create S3 bucket
+### 3. Create AWS S3 bucket
 ```bash
 # Create bucket (replace with your bucket name and preferred region)
 ./aws-s3-helper.sh create-bucket cnpg-backup-510 ap-northeast-1
 ```
 
-### 4. Update cluster configuration
+### 4. Update cluster configuration manifest
 ```bash
 # Update cluster.yaml with your bucket name
 ./aws-s3-helper.sh update-cluster cnpg-backup-510
@@ -41,34 +41,10 @@ aws configure
 ### 5. Apply configuration
 ```bash
 # Deploy the backup configuration
-./setup-aws-s3-backup.sh
+./10-setup-backup-s3.sh
 ```
 
 ## 🔧 Manual Configuration
-
-### AWS IAM Policy
-Create an IAM user with this policy for CNPG backups:
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:GetObject",
-                "s3:PutObject",
-                "s3:DeleteObject",
-                "s3:ListBucket"
-            ],
-            "Resource": [
-                "arn:aws:s3:::your-cnpg-backup-bucket",
-                "arn:aws:s3:::your-cnpg-backup-bucket/*"
-            ]
-        }
-    ]
-}
-```
 
 ### S3 Bucket Configuration
 - **Bucket name**: Choose a unique name (e.g., `cnpg-backups-unique-id`)
@@ -95,9 +71,8 @@ Create an IAM user with this policy for CNPG backups:
 
 ## 📁 File Structure
 
-- `aws-s3-backup-storage.yaml` - AWS credentials secret
 - `cluster.yaml` - Updated for AWS S3 backup
-- `setup-aws-s3-backup.sh` - Setup script
+- `10-setup-backup-s3.sh` - Setup script
 - `aws-s3-helper.sh` - Helper script for AWS operations
 
 ## 🔄 Backup Operations
@@ -116,7 +91,7 @@ aws s3 ls s3://your-cnpg-backup-bucket/example1/ --recursive
 ```
 
 ### Scheduled backups
-Configured in `backup-schedule.yaml` - runs hourly by default.
+Configured in `s3-backup-schedule.yaml` - runs hourly by default.
 
 ## 🔒 Security Best Practices
 
@@ -134,9 +109,9 @@ For disaster recovery, consider:
 # In cluster.yaml - add secondary backup location
 backup:
   barmanObjectStore:
-    destinationPath: "s3://primary-backup-bucket/example1"
+    destinationPath: "s3://primary-backup-bucket"
   secondaryBarmanObjectStore:
-    destinationPath: "s3://secondary-backup-bucket/example1"
+    destinationPath: "s3://secondary-backup-bucket"
 ```
 
 ## ❌ Troubleshooting
