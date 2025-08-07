@@ -26,7 +26,7 @@ fi
 echo ""
 
 # Generate unique backup name with timestamp
-BACKUP_NAME="manual-$(date +%Y%m%d-%H%M%S)"
+BACKUP_NAME="manual-$(date +%y%m%d-%H%M)"
 echo "📦 Creating manual backup: $BACKUP_NAME"
 echo ""
 

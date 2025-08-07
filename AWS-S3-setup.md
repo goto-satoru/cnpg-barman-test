@@ -71,7 +71,7 @@ Create an IAM user with this policy for CNPG backups:
 ```
 
 ### S3 Bucket Configuration
-- **Bucket name**: Choose a unique name (e.g., `my-company-cnpg-backups`)
+- **Bucket name**: Choose a unique name (e.g., `cnpg-backups-unique-id`)
 - **Region**: Choose your preferred AWS region
 - **Versioning**: Enable for backup protection
 - **Encryption**: Enable server-side encryption

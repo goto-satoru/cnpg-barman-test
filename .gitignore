@@ -22,6 +22,7 @@ minio-data/
 *.temp
 temp/
 tmp/
+.cache_ggshield
 
 # Editor and IDE files
 .vscode/

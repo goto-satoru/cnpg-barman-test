@@ -21,7 +21,7 @@ else
     exit 1
 fi
 
-# 3. Apply cluster configuration with AWS S3 backup
+# Apply cluster configuration with AWS S3 backup
 echo -e "\nApplying cluster configuration with AWS S3 backup..."
 kubectl apply -f cluster.yaml
 
@@ -31,7 +31,7 @@ kubectl wait --for=condition=Ready cluster/$CLUSTER_NAME -n $NAMESPACE --timeout
 
 # 4. Setup scheduled backups
 BACKUP_SCHEDULE_FILE="s3-backup-schedule.yaml"
-echo -e "\n4. Setting up scheduled backups..."
+echo -e "\nSetting up scheduled backups..."
 if [ -f "$BACKUP_SCHEDULE_FILE" ]; then
     kubectl apply -f "$BACKUP_SCHEDULE_FILE"
     echo "✅ Scheduled backup configured"
@@ -39,8 +39,8 @@ else
     echo "   ⚠️  Backup schedule file not found, skipping..."
 fi
 
-# 5. Test AWS S3 connectivity
-echo -e "\n5. Testing AWS S3 connectivity..."
+# Test AWS S3 connectivity
+echo -e "\nTesting AWS S3 connectivity..."
 echo "   Checking if backup storage credentials work..."
 
 # Get AWS credentials for testing

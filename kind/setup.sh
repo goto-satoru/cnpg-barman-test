@@ -33,13 +33,10 @@ cd "${git_repo_root}"
 export KUBECONFIG=${kube_config_path}
 
 # Setup the US Kind Cluster
-kind create cluster --config ${kind_config_path} --name k8s-us
+kind create cluster --config ${kind_config_path} --name my-k8s
 # The `node-role.kubernetes.io` label must be set after the node have been created
 kubectl label node -l postgres.node.kubernetes.io node-role.kubernetes.io/postgres=
 kubectl label node -l infra.node.kubernetes.io node-role.kubernetes.io/infra=
 kubectl label node -l app.node.kubernetes.io node-role.kubernetes.io/app=
 
-# $CONTAINER_PROVIDER network connect kind minio-eu
-$CONTAINER_PROVIDER network connect kind minio-us
-
-./scripts/info.sh
+./kind/info.sh

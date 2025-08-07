@@ -81,7 +81,7 @@ function show_credentials() {
 
 function create_bucket() {
     local bucket_name="$1"
-    local region="${2:-us-east-1}"
+    local region="${2:-ap-northeast-1}"
     
     if [ -z "$bucket_name" ]; then
         echo "Error: Bucket name required"
@@ -116,9 +116,6 @@ function create_bucket() {
     else
         echo "❌ Failed to create bucket"
     fi
-
-    echo "Next step:"
-    echo "$0 update_cluster $bucket_name"
 }
 
 function test_connection() {
