@@ -2,7 +2,7 @@
 # Setup backup and restore for CNPG cluster with AWS S3
 
 NAMESPACE=default
-CLUSTER_NAME=cluster-example
+CLUSTER_NAME=example1
 echo "Setting up backup and restore for CNPG cluster with AWS S3..."
 
 # Check if kubectl is working
@@ -58,7 +58,7 @@ echo -e "\n✅ AWS S3 backup setup complete!"
 echo ""
 echo "📊 AWS S3 Configuration:"
 echo "   Bucket: cnpg-backup-510"
-echo "   Cluster: cluster-example"
+echo "   Cluster: example1"
 echo "   Namespace: cnpg"
 echo ""
 echo "🔍 Check status:"
@@ -75,7 +75,7 @@ echo "     name: manual-backup-\$(date +%Y%m%d-%H%M%S)"
 echo "     namespace: cnpg"
 echo "   spec:"
 echo "     cluster:"
-echo "       name: cluster-example"
+echo "       name: example1"
 echo "   EOF"
 echo ""
 echo "� View credentialsc:"

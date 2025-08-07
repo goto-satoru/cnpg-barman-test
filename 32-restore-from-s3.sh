@@ -2,8 +2,8 @@
 # restore CNPG cluster from AWS S3 backup
 
 BUCKET_NAME="cnpg-backup-510"
-SOURCE_CLUSTER_NAME="cluster-example"
-RESTORE_CLUSTER_NAME="cluster-restored"
+SOURCE_CLUSTER_NAME="example1"
+RESTORE_CLUSTER_NAME="restored"
 NAMESPACE="default"
 SECRET_NAME="backup-storage-creds"
 

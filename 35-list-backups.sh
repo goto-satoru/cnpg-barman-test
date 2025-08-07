@@ -4,7 +4,7 @@
 # Configuration
 NAMESPACE=default
 BUCKET_NAME="cnpg-backup-510"
-CLUSTER_NAME="cluster-example"
+CLUSTER_NAME="example1"
 SECRET_NAME="backup-storage-creds"
 
 # Extract AWS credentials from Kubernetes secret

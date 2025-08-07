@@ -10,7 +10,7 @@ kubectl delete backup --all
 
 # Suspend scheduled backup
 echo "Suspending scheduled backup..."
-kubectl patch scheduledbackup cluster-example-scheduled-backup  -p '{"spec":{"suspend":true}}'
+kubectl patch scheduledbackup example1-scheduled-backup  -p '{"spec":{"suspend":true}}'
 
 # Apply cluster without backup configuration
 echo "Applying cluster configuration without backup..."

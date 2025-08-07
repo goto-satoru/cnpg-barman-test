@@ -2,7 +2,7 @@
 # create manual backups for CNPG cluster with AWS S3
 
 NAMESPACE=default
-CLUSTER_NAME=cluster-example
+CLUSTER_NAME=example1
 BUCKET_NAME=cnpg-backup-510
 
 echo "=== CNPG Manual Backup Tool (AWS S3) ==="
@@ -114,9 +114,9 @@ echo ""
 echo "🔧 Useful commands:"
 echo "   # View backup details"
 echo "   kubectl describe backup $BACKUP_NAME -n $NAMESPACE"
-echo ""
-echo "   # View backup logs"
-echo "   kubectl logs -n $NAMESPACE -l cnpg.io/backup=$BACKUP_NAME"
+# echo ""
+# echo "   # View backup logs"
+# echo "   kubectl logs -n $NAMESPACE -l cnpg.io/backup=$BACKUP_NAME"
 echo ""
 echo "   # Delete this backup"
 echo "   kubectl delete backup $BACKUP_NAME -n $NAMESPACE"

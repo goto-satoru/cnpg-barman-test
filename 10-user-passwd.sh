@@ -1,13 +1,13 @@
 #!/bin/sh
 
-kubectl patch svc cluster-example-rw -p '{"spec":{"type":"NodePort"}}'
+kubectl patch svc example1-rw -p '{"spec":{"type":"NodePort"}}'
 
-# Port forward PostgreSQL to localhost:5432
-kubectl port-forward svc/cluster-example-rw 5432:5432 &
+# Port forward PostgreSQL to localhost:15432
+kubectl port-forward svc/example1-rw 15432:5432 &
 PORT_FORWARD_PID=$!
 
-user=`kubectl get secret cluster-example-app -o jsonpath="{.data.username}" | base64 --decode`
-passwd=`kubectl get secret cluster-example-app -o jsonpath="{.data.password}" | base64 --decode && echo`
+user=`kubectl get secret example1-app -o jsonpath="{.data.username}" | base64 --decode`
+passwd=`kubectl get secret example1-app -o jsonpath="{.data.password}" | base64 --decode && echo`
 
 echo "username: $user"
 echo "password: $passwd"

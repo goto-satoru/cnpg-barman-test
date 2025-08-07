@@ -112,7 +112,7 @@ Create an IAM user with this policy for CNPG backups:
 ./backup-restore-ops.sh list-backups
 
 # Or directly with AWS CLI
-aws s3 ls s3://your-cnpg-backup-bucket/cluster-example/ --recursive
+aws s3 ls s3://your-cnpg-backup-bucket/example1/ --recursive
 ```
 
 ### Scheduled backups
@@ -134,9 +134,9 @@ For disaster recovery, consider:
 # In cluster.yaml - add secondary backup location
 backup:
   barmanObjectStore:
-    destinationPath: "s3://primary-backup-bucket/cluster-example"
+    destinationPath: "s3://primary-backup-bucket/example1"
   secondaryBarmanObjectStore:
-    destinationPath: "s3://secondary-backup-bucket/cluster-example"
+    destinationPath: "s3://secondary-backup-bucket/example1"
 ```
 
 ## ❌ Troubleshooting
@@ -161,13 +161,13 @@ backup:
 ### Debug Commands
 ```bash
 # Check CNPG cluster logs
-kubectl logs -n default cluster-example-1
+kubectl logs -n default example1-1
 
 # Check backup job logs
-kubectl logs -n default job/backup-cluster-example-xxx
+kubectl logs -n default job/backup-example1-xxx
 
 # Test S3 access from pod
-kubectl exec -it cluster-example-1 -n default -- barman-cloud-backup-list s3://your-bucket cluster-example
+kubectl exec -it example1-1 -n default -- barman-cloud-backup-list s3://your-bucket example1
 ```
 
 ## 💰 Cost Optimization

@@ -1,29 +1,22 @@
 apiVersion: postgresql.k8s.enterprisedb.io/v1
 kind: ScheduledBackup
 metadata:
-  name: cluster-example-scheduled
+  name: example1-scheduled
 spec:
   # Schedule backups every hour
-  schedule: "0 * * * *"
-
+  schedule: "0 0 * * * *"
   # Backup retention policy
   backupOwnerReference: self
-
-  # Target cluster for backup
   cluster:
-    name: cluster-example
-
-  # Suspend backups if needed
-  suspend: true
-
-  # Immediate backup after creation
-  immediate: true
+    name: example1
+  suspend: false
+  immediate: false
 ---
 # On-demand backup
 apiVersion: postgresql.k8s.enterprisedb.io/v1
 kind: Backup
 metadata:
-  name: cluster-example
+  name: example1
 spec:
   cluster:
-    name: cluster-example
+    name: example1

@@ -3,7 +3,7 @@
 # Common backup and restore operations for CNPG
 
 NAMESPACE="default"
-CLUSTER_NAME="cluster-example"
+CLUSTER_NAME="example1"
 
 function show_help() {
     echo "Usage: $0 <command> [options]"
@@ -19,13 +19,13 @@ function show_help() {
     echo ""
     echo "Examples:"
     echo "  $0 backup-now"
-    echo "  $0 restore cluster-example-manual-backup"
+    echo "  $0 restore example1-manual-backup"
     echo "  $0 restore-pitr '2024-08-05 14:30:00'"
     echo "  $0 list-backups"
 }
 
 function backup_now() {
-    local backup_name="cluster-example-manual-$(date +%Y%m%d%H%M%S)"
+    local backup_name="example1-manual-$(date +%Y%m%d%H%M%S)"
     echo "Creating backup: $backup_name"
     
     cat <<EOF | kubectl apply -f -
@@ -57,7 +57,7 @@ function restore_from_backup() {
         exit 1
     fi
     
-    local restore_cluster_name="cluster-restored-$(date +%Y%m%d%H%M%S)"
+    local restore_cluster_name="restored-$(date +%Y%m%d-%H%M)"
     echo "Restoring from backup $backup_name to new cluster $restore_cluster_name"
     
     cat <<EOF | kubectl apply -f -
@@ -108,7 +108,7 @@ spec:
   externalClusters:
     - name: cluster-backup-source
       barmanObjectStore:
-        destinationPath: "s3://cnpg-backup-bucket/cluster-example"
+        destinationPath: "s3://cnpg-backup-bucket/example1"
         s3Credentials:
           accessKeyId:
             name: backup-storage-creds
@@ -155,7 +155,7 @@ function export_backup() {
     
     echo "Exporting backup $backup_name..."
     echo "Note: This requires access to the backup storage directly."
-    echo "For MinIO, you can use: mc cp --recursive local/cnpg-backup-bucket/cluster-example ./exported-backup/"
+    echo "For MinIO, you can use: mc cp --recursive local/cnpg-backup-bucket/example1 ./exported-backup/"
 }
 
 # Main script logic

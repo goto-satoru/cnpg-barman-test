@@ -70,7 +70,7 @@ bootstrap:
 bootstrap:
   recovery:
     backup:
-      name: cluster-example-manual-backup
+      name: example1-manual-backup
 ```
 
 ### 3. Point-in-Time Recovery
