@@ -17,7 +17,8 @@ echo -e "\nVerifying AWS credentials..."
 if kubectl get secret backup-storage-creds -n $NAMESPACE > /dev/null 2>&1; then
     echo "✅ AWS S3 credentials deployed in $NAMESPACE successfully"
 else
-    echo "❌ Error: Failed to create backup-storage-creds secret in $NAMESPACE"
+    echo "❌ Error: no backup-storage-creds secret in $NAMESPACE"
+    echo "execute ./aws-s3-help.sh setup-credentials <access-key> <secret-key>"
     exit 1
 fi
 
