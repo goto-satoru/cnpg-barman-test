@@ -274,12 +274,12 @@ sleep 10
 
 # Check if sample data exists
 print_info "Checking restored data..."
-DATA_COUNT=$(kubectl exec -n "$NAMESPACE" "$RESTORE_CLUSTER_NAME-1" -- psql -U postgres -d app -t -c "SELECT COUNT(*) FROM sample_table;" 2>/dev/null | tr -d ' ')
+DATA_COUNT=$(kubectl exec -n "$NAMESPACE" "$RESTORE_CLUSTER_NAME-1" -- psql -U postgres -d app -t -c "SELECT COUNT(*) FROM users;" 2>/dev/null | tr -d ' ')
 
 if [ $? -eq 0 ] && [ -n "$DATA_COUNT" ] && [ "$DATA_COUNT" -gt 0 ]; then
-    print_success "Data verification successful! Found $DATA_COUNT records in sample_table"
+    print_success "Data verification successful! Found $DATA_COUNT records in users"
 else
-    print_warning "Data verification: No sample_table found or empty"
+    print_warning "Data verification: No users found or empty"
     echo "   This might be normal if the original cluster had no sample data"
 fi
 

@@ -1,24 +1,21 @@
-# CNPG Backup and Restore Guide
+# CNPG Cluster Backup and Restore 
 
-This guide covers backup and restore operations for CloudNativePG (CNPG) clusters, including both PostgreSQL and EDB Postgres Advanced Server.
-
-## Files Overview
-
-- `cluster.yaml` - Main PostgreSQL cluster with backup configuration
-- `epas16.yaml` - EDB Postgres Advanced Server cluster with backup configuration
-- `backup-storage.yaml` - MinIO deployment for backup storage
-- `backup-schedule.yaml` - Scheduled and manual backup definitions
-- `restore-cluster.yaml` - Various restore examples
-- `setup-backup.sh` - Initial backup setup script
-- `backup-restore-ops.sh` - Common backup/restore operations
+backup and restore operations for CloudNativePG (CNPG) clusters, including both Community PostgreSQL and EDB Postgres Advanced Server.
 
 ## Quick Start
 
 ### 1. Setup Backup Infrastructure
 
+create secret, which contains AWS access key and secret key
+
+```
+./aws-s3-helper.sh setup-credentials <access-key> <secret-key>
+```
+
+Run the setup script to deploy backup storage and configure backups
+
 ```bash
-# Run the setup script to deploy backup storage and configure backups
-./20-setup-backup.sh
+./10-setup-backup.sh
 ```
 
 ### 2. Common Operations

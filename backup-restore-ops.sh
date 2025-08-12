@@ -25,7 +25,7 @@ function show_help() {
 }
 
 function backup_now() {
-    local backup_name="example1-manual-$(date +%Y%m%d%H%M%S)"
+    local backup_name="example1-manual-$(date +%y%m%d-%H%M)"
     echo "Creating backup: $backup_name"
     
     cat <<EOF | kubectl apply -f -
